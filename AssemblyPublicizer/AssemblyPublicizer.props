@@ -1,6 +1,7 @@
 ﻿<Project TreatAsLocalProperty="PublicizeTaskAssembly">
-    <PropertyGroup>
-        <PublicizeTaskAssembly>$(MSBuildThisFileDirectory)..\lib\net472\$(MSBuildThisFileName).dll</PublicizeTaskAssembly>
-    </PropertyGroup>
-    <UsingTask TaskName="AssemblyPublicizer.PublicizeTask" AssemblyFile="$(PublicizeTaskAssembly)" />
-</Project> 
+	<PropertyGroup>
+		<PublicizeTaskAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)..\tasks\net6.0\$(MSBuildThisFileName).dll</PublicizeTaskAssembly>
+		<PublicizeTaskAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'">$(MSBuildThisFileDirectory)..\tasks\net472\$(MSBuildThisFileName).dll</PublicizeTaskAssembly>
+	</PropertyGroup>
+	<UsingTask TaskName="AssemblyPublicizer.PublicizeTask" AssemblyFile="$(PublicizeTaskAssembly)" />
+</Project>
